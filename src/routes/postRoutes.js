@@ -1,17 +1,28 @@
 
 import express from "express"
-import { listPosts } from "../controllers/postsController.js";
+import multer from "multer";
+import { listPosts, sendNewPost, uploadImage } from "../controllers/postsController.js";
 listPosts
 
-const routes =(app) => {
+//Inicializar o multer
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+})
 
+const upload = multer({ dest: "./uploads" , storage})
+
+const routes = (app) => {
     //Transformar em JSON
-app.use(express.json())
-
+app.use(express.json());
  //Criar uma rota
- app.get("/posts", listPosts );
-
+ app.get("/posts", listPosts);
+ app.post("/posts", sendNewPost);
+ app.post("/upload", upload.single("image"), uploadImage)
 }
-
 
 export default routes;
