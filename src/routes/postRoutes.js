@@ -1,7 +1,7 @@
 
 import express from "express"
 import multer from "multer";
-import { listPosts, sendNewPost, uploadImage } from "../controllers/postsController.js";
+import { listPosts, sendNewPost, uploadImage, updateNewPost } from "../controllers/postsController.js";
 listPosts
 
 //Inicializar o multer
@@ -23,6 +23,8 @@ app.use(express.json());
  app.get("/posts", listPosts);
  app.post("/posts", sendNewPost);
  app.post("/upload", upload.single("image"), uploadImage)
+
+ app.put("/upload/:id", updateNewPost)
 }
 
 export default routes;

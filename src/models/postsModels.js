@@ -1,4 +1,5 @@
 
+import { ObjectId } from "mongodb";
 import conectarAoBanco from "../config/dbConfig.js"
 
 const conextion = await conectarAoBanco(process.env.STRING_CONEXTION);
@@ -17,5 +18,14 @@ export async function createPost(newPost) {
   const db = conextion.db("imersao-instabytes");
   const myCollection = db.collection("posts");
   return myCollection.insertOne(newPost)
+
+}
+
+export async function uptadePost(id, newPost) {
+
+  const db = conextion.db("imersao-instabytes");
+  const myCollection = db.collection("posts");
+  const objID = ObjectId.createFromHexString(id)
+  return myCollection.updateOne({_id: new ObjectId(objID)}, {$set: newPost})
 
 }
