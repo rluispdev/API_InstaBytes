@@ -22,9 +22,9 @@ try {
 
 export async function uploadImage(req, res){
     const newPost = {
-        description: " ",
+        descricao: "",
         imgUrl: req.file.originalname,
-        alt: " "
+        alt: ""
     }
     try {
         const createdPost = await createPost(newPost)
@@ -40,7 +40,7 @@ export async function uploadImage(req, res){
      
     export async function updateNewPost(req, res){
         const id = req.params.id;
-        const urlImage = `http//localhost:3000/${id}.png`
+        const urlImage = `http://localhost:3000/${id}.png`
        
        
         try {
@@ -49,11 +49,11 @@ export async function uploadImage(req, res){
 
             const post = {
                 imgUrl: urlImage,
-                description: geminiDescription,
+                descricao: geminiDescription,
                 alt: req.body.alt
             }
 
-            const createdPost = await uptadePost(id, post)
+            const createdPost = await uptadePost(id, post);
             res.status(200).json(createdPost);
         }catch(error){
             console.error(error.message);
