@@ -2,6 +2,13 @@
 import express from "express"
 import multer from "multer";
 import { listPosts, sendNewPost, uploadImage, updateNewPost } from "../controllers/postsController.js";
+import cors from "cors";
+
+const corsOptions = {
+    origin: "http://localhost:8000",
+    optionsSuccessStatus: 200
+}
+
 listPosts
 
 //Inicializar o multer
@@ -19,6 +26,7 @@ const upload = multer({ dest: "./uploads" , storage})
 const routes = (app) => {
     //Transformar em JSON
 app.use(express.json());
+app.use(cors(corsOptions))
  //Criar uma rota
  app.get("/posts", listPosts);
  app.post("/posts", sendNewPost);
@@ -26,5 +34,4 @@ app.use(express.json());
 
  app.put("/upload/:id", updateNewPost)
 }
-
 export default routes;
