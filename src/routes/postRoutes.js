@@ -5,7 +5,10 @@ import { listPosts, sendNewPost, uploadImage, updateNewPost } from "../controlle
 import cors from "cors";
 
 const corsOptions = {
-    origin: "http://localhost:8000",
+    origin: [
+        "http://localhost:8000", // Mantenha para desenvolvimento local
+       // Adicione o domínio do seu frontend
+    ],
     optionsSuccessStatus: 200
 }
 
