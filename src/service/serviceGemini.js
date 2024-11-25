@@ -1,11 +1,17 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 export default async function gerarDescricaoComGemini(imageBuffer) {
-  const prompt =
-    "Gere uma descrição em português do brasil para a seguinte imagem";
+  const prompt = `
+    Analise a imagem a seguir e forneça as seguintes informações em forma de texto direto  sem bullets e começar o texto sempre de uma forma diferente, o texto deve ter no máximo 250 caracters sobre a formiga:
+
+    * **Nome científico:**
+    * **Localização:**
+    * **Habitat:**
+    * **Nome popular:**
+    * **Curiosidades:** (2-3)
+  `;
 
   try {
     const image = {
