@@ -12,5 +12,6 @@
       "dest": "/"
     }
   ],
-  "devCommand": "nodemon server.js" 
+  "devCommand": "nodemon server.js",
+  "regions": ["sfo1"]  
 }
